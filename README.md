@@ -7,7 +7,9 @@ This is a WIP Android application built on the work of Boyd et al. (2016) and Ed
 > 
 > Prosody has been shown to convey 70%-90% of the meaning of an utterance.
 > 
-> Atypical prosody is one of the most noticeable characteristics of autism, making speakers inadvertently sound angry, bored, or tired. It is also one of the most difficult social skills to change over a lifetime, often requiring intensive and extensive intervention. Atypical prosody leads to some individuals with autism to struggle to develop peer relationships, recognize emotions, and generally develop social skills for interactive communication.
+> Atypical prosody is one of the most noticeable characteristics of autism, making speakers inadvertently sound angry, bored, or tired. It is also one of the most difficult social skills to change over a lifetime, often requiring intensive and extensive intervention.
+>
+> Atypical prosody leads to some individuals with autism to struggle to develop peer relationships, recognize emotions, and generally develop social skills for interactive communication.
 
 - Boyd et al. (2016)
 
