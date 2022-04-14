@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">soundcheck</string>
+    <string name="microphone_content_description">Press to activate</string>
+</resources>
