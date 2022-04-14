@@ -1,5 +1,5 @@
 # soundcheck
-Soundcheck aims to provide speech assistance by providing haptic feedback to atypical volume. This is a WIP android application built on the work of Boyd et al. (2016) and Edgerton and Wine (2017) that seeks to provide conversational assistance to those with autism spectrum disorder.
+Soundcheck aims to provide speech assistance by providing haptic feedback to atypical volume. This is a WIP Android application built on the work of Boyd et al. (2016) and Edgerton and Wine (2017) that seeks to provide conversational assistance to those with autism spectrum disorder.
 
 > Prosody includes the rhythm and sounds in speech, and refers to the acoustic way words are spoken to convey meaning through changes in pitch, volume, and rate of speech.
 > 
@@ -9,6 +9,9 @@ Soundcheck aims to provide speech assistance by providing haptic feedback to aty
 
 - Boyd et al. (2016)
 
+Soundcheck is based on SayWAT (a Google Glasses application) and Voice Meter Pro (an Android application). It differs from the former by relying on existing commonplace hardware (earbuds, phones) and using haptic feedback rather than visual feedback. It differs from the latter by focusing on passive monitoring, designed to be used to augument natural conversations rather than as a focus.
+
+------
 
 Boyd, Louanne, et al. “SayWAT: Augmenting Face-to-Face Conversations for Adults with Autism.” Proceedings of the 2016 CHI Conference on Human Factors in Computing Systems, 7 May 2016, https://doi.org/10.1145/2858036.2858215. 
 
