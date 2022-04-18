@@ -2,37 +2,37 @@ package com.example.soundcheck;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
-
 import android.Manifest;
 import android.content.Context;
 import android.content.pm.PackageManager;
 import android.media.AudioFormat;
 import android.media.AudioRecord;
 import android.media.MediaRecorder;
-import android.media.audiofx.NoiseSuppressor;
 import android.os.Bundle;
 import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
-
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-
 import java.util.ArrayList;
+import java.util.Arrays;
 
 public class MainActivity extends AppCompatActivity {
 
-    private static final int AUDIO_SOURCE = MediaRecorder.AudioSource.MIC;
+    private static final int AUDIO_SOURCE = MediaRecorder.AudioSource.VOICE_RECOGNITION;
     private static final int SAMPLE_RATE = 44100; // DEFAULT
-    private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_DEFAULT;
+    private static final int CHANNEL_CONFIG = AudioFormat.CHANNEL_IN_MONO;
     private static final int AUDIO_FORMAT = AudioFormat.ENCODING_PCM_16BIT;
     private static final int BUFFER_SIZE = AudioRecord.getMinBufferSize(SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT);
     private static final int REQUEST_CODE = 0;
     private static final int DATA_OFFSET = 0;
 
-    private static final int AVERAGE_DIVISOR = 15;
-    private static final int WAIT_PERIOD = 100;
+    private static final int AVERAGE_PERIOD = 10;
+    private static final double MIN_THRESHOLD = 102;
+    private static final double VOLUME_THRESHOLD_PERCENTAGE = 1.1;
+//    private static final double VOLUME_THRESHOLD_PERCENTAGE = 1.65;
+    private static final double PAD_VOLUME = 40;
+
     private static final int VIBE_PERIOD = 300;
-    private static final int VOLUME_THRESHOLD = 40;
 
     private static boolean isRecording = false;
     private static Thread listeningThread;
@@ -53,9 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         AudioRecord mic = new AudioRecord(AUDIO_SOURCE, SAMPLE_RATE, CHANNEL_CONFIG, AUDIO_FORMAT, BUFFER_SIZE);
         Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        if (NoiseSuppressor.isAvailable()) {
-            NoiseSuppressor suppressor = NoiseSuppressor.create(mic.getAudioSessionId());
-        }
 
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,20 +66,24 @@ public class MainActivity extends AppCompatActivity {
                     listeningThread = new Thread(new Runnable() {
                         public void run() {
                             short[] buffer = new short[BUFFER_SIZE];
-                            ArrayList<Double> volHistory = new ArrayList<>();
+                            ArrayList<Double> volumes = new ArrayList<>(
+                                    Arrays.asList(100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0, 100.0));
                             while (isRecording) {
                                 double volume = getVolume(mic, buffer);
-                                volHistory.add(volume);
-
-                                double average = 0;
-                                for (int i = volHistory.size() - 1; i >= Math.max(0, volHistory.size() - 1 - AVERAGE_DIVISOR); i--) {
-                                    average += volHistory.get(i);
-                                }
-                                average /= AVERAGE_DIVISOR;
-
-                                if (average > VOLUME_THRESHOLD) {
+                                double threshold = Math.max(MIN_THRESHOLD, getAverageVolume(volumes) * VOLUME_THRESHOLD_PERCENTAGE);
+                                if (volume > threshold) {
                                     vibe.vibrate(VIBE_PERIOD);
+                                    Log.d("DEBUG", "TRIGGER");
                                 }
+                                if (volume == 0) {
+                                    volumes.add(PAD_VOLUME);
+                                } else {
+                                    volumes.add(volume);
+                                }
+                                if (volume != 0) {
+                                    volumes.add(volume);
+                                }
+                                Log.d("DEBUG", String.valueOf(threshold) + " " + String.valueOf(volume));
                             }
                             mic.stop();
                             listeningThread.interrupt();
@@ -101,13 +102,16 @@ public class MainActivity extends AppCompatActivity {
             v += s * s;
         }
         double volume = 20 * Math.log10((double) v / read);
-        synchronized (Lock) {
-            try {
-                Lock.wait(WAIT_PERIOD);
-            } catch (Exception e) {
-
-            }
-        }
+        if (Double.isNaN(volume)) volume = 0;
         return volume;
+    }
+
+    private double getAverageVolume(ArrayList<Double> volumes) {
+        double average = 0;
+        for (int i = volumes.size() - 1; i >= Math.max(0, volumes.size() - 1 - AVERAGE_PERIOD); i--) {
+            average += volumes.get(i);
+        }
+        average /= AVERAGE_PERIOD;
+        return average;
     }
 }
