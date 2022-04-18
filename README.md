@@ -1,5 +1,5 @@
 # soundcheck
-Soundcheck aims to provide speech assistance by providing haptic feedback to atypical volume.
+Soundcheck aims to provide speech assistance to autistic individuals by providing haptic feedback to atypical volume
 
 This is a WIP Android application built on the work of Boyd et al. (2016) and Edgerton and Wine (2017) that seeks to provide conversational assistance to those with autism spectrum disorder, with application considerations for general speech therapy.
 
