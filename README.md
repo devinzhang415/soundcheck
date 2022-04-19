@@ -3,11 +3,13 @@ Soundcheck aims to provide passive speech assistance to autistic individuals by 
 
 This is a WIP Android application built on the work of Boyd et al. (2016) and Edgerton and Wine (2017) that seeks to provide conversational assistance to those with autism spectrum disorder, with application considerations for general speech therapy.
 
+
 > "Prosody deficits are well documented in people with Autism Spectrum Disorder."
 > 
-> It is estimated that between 47 percent and 57 percent of high-functioning adolescents with ASD have impaired prosody"
+> It is estimated that between 47 percent and 57 percent of high-functioning adolescents with ASD have impaired prosody."
 
 - Dunn et al. (2016)
+
 
 > "Prosody includes the rhythm and sounds in speech, and refers to the acoustic way words are spoken to convey meaning through changes in pitch, volume, and rate of speech.
 > 
@@ -18,6 +20,7 @@ This is a WIP Android application built on the work of Boyd et al. (2016) and Ed
 > Atypical prosody leads to some individuals with autism to struggle to develop peer relationships, recognize emotions, and generally develop social skills for interactive communication."
 
 - Boyd et al. (2016)
+
 
 Soundcheck is based on SayWAT (a Google Glasses application) and Voice Meter Pro (an Android application).
 
