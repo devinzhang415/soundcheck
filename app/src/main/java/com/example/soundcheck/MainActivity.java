@@ -27,12 +27,14 @@ public class MainActivity extends AppCompatActivity {
     private static final int DATA_OFFSET = 0;
 
     private static final int AVERAGE_PERIOD = 10;
-    private static final double MIN_THRESHOLD = 102;
-    private static final double VOLUME_THRESHOLD_PERCENTAGE = 1.1;
+//    private static final double MIN_THRESHOLD = 102;
+    private static final double MIN_THRESHOLD = 110;
+//    private static final double VOLUME_THRESHOLD_PERCENTAGE = 1.1;
+    private static final double VOLUME_THRESHOLD_PERCENTAGE = 1.18;
 //    private static final double VOLUME_THRESHOLD_PERCENTAGE = 1.65;
     private static final double PAD_VOLUME = 40;
 
-    private static final int VIBE_PERIOD = 300;
+    private static final int VIBE_PERIOD = 200;
 
     private static boolean isRecording = false;
     private static Thread listeningThread;
@@ -71,18 +73,18 @@ public class MainActivity extends AppCompatActivity {
                             while (isRecording) {
                                 double volume = getVolume(mic, buffer);
                                 double threshold = Math.max(MIN_THRESHOLD, getAverageVolume(volumes) * VOLUME_THRESHOLD_PERCENTAGE);
+
                                 if (volume > threshold) {
                                     vibe.vibrate(VIBE_PERIOD);
                                     Log.d("DEBUG", "TRIGGER");
                                 }
+
                                 if (volume == 0) {
                                     volumes.add(PAD_VOLUME);
                                 } else {
                                     volumes.add(volume);
                                 }
-                                if (volume != 0) {
-                                    volumes.add(volume);
-                                }
+
                                 Log.d("DEBUG", String.valueOf(threshold) + " " + String.valueOf(volume));
                             }
                             mic.stop();
