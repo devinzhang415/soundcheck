@@ -33,8 +33,10 @@ public class MainActivity extends AppCompatActivity {
 //    private static final double MIN_THRESHOLD = 102;
     private static final double MIN_THRESHOLD = 110;
 //    private static final double VOLUME_THRESHOLD_PERCENTAGE = 1.1;
-    private static final double VOLUME_THRESHOLD_PERCENTAGE = 1.18;
+//    private static final double VOLUME_THRESHOLD_PERCENTAGE = 1.18;
+    private static final double VOLUME_THRESHOLD_PERCENTAGE = 1.6;
 //    private static final double VOLUME_THRESHOLD_PERCENTAGE = 1.65;
+
     private static final double PAD_VOLUME = 40;
 
     private static final int VIBE_PERIOD = 200;
