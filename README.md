@@ -1,10 +1,10 @@
 # soundcheck
 Soundcheck is an android app that provides passive speech assistance to autistic individuals by providing haptic feedback to atypical volume.
 
-This is a WIP Android application built on the work of Boyd et al. (2016) and Edgerton and Wine (2017) that seeks to provide conversational assistance to those with autism spectrum disorder, with application considerations for general speech therapy.
+This is a WIP Android application built on the work of Boyd et al. (2016) and Edgerton and Wine (2017) that seeks to provide conversational assistance to those with autism spectrum disorder (ASD), with application considerations for general speech therapy.
 
 
-> "Prosody deficits are well documented in people with Autism Spectrum Disorder."
+> "Prosody deficits are well documented in people with ASD.
 > 
 > It is estimated that between 47 percent and 57 percent of high-functioning adolescents with ASD have impaired prosody."
 
